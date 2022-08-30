@@ -1,9 +1,6 @@
 package com.codestates.pre047.post.controller;
 
 import com.codestates.pre047.post.dto.PostDto;
-import com.codestates.pre047.post.dto.PostPatchDto;
-import com.codestates.pre047.post.dto.PostPostDto;
-import com.codestates.pre047.post.dto.PostResponseDto;
 import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.mapper.PostMapper;
 import com.codestates.pre047.post.service.PostService;
@@ -38,7 +35,7 @@ public class PostController {
     }
 
     // 글작성
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity createPost(@Valid @RequestBody PostDto.Post requestBody) {
         Post post = mapper.postPostToPost(requestBody);
 
@@ -87,7 +84,7 @@ public class PostController {
 
         List<Post> posts = pageposts.getContent();
 
-        List<PostDto.Response> responses = mapper.postsToPostsResponseDtos(posts);
+        List<PostDto.Response> responses = mapper.postsToPostResponses(posts);
 
         return new ResponseEntity<>(new MultiResponseDto<>(responses,
                 pageposts),HttpStatus.OK);
