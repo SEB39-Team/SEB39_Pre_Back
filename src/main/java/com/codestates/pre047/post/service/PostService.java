@@ -17,7 +17,7 @@ public interface PostService {
 
     // 게시글 조회
 
-    public Post findPost(Long postId);
+    public Post findPost(long postId);
 
     // 전체글 조회
 
@@ -25,5 +25,5 @@ public interface PostService {
 
     // 전체글 삭제
 
-    public void deletePost(Long postId);
+    public void deletePost(long postId);
 }

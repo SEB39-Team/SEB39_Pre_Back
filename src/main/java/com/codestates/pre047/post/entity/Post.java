@@ -28,7 +28,7 @@ public class Post {
     // 회원 기능 구현 후 엔터티 매핑
 
 
-    public Post(Long postId, String title, String content) {
+    public Post(long postId, String title, String content) {
         this.postId = postId;
         this.title = title;
         this.content = content;

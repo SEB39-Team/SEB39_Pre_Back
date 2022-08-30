@@ -14,8 +14,8 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 public class PostPatchDto {
 
-    @Positive
-    private Long postId;
+
+    private long postId;
 
     @NotBlank(message = "Title is missing.")
     private String title;

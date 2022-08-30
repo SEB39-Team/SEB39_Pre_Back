@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-30T12:57:49+0900",
+    date = "2022-08-30T15:30:06+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.15.1 (Oracle Corporation)"
 )
 @Component
@@ -39,9 +39,7 @@ public class PostMapperImpl implements PostMapper {
 
         Post post = new Post();
 
-        if ( postPatchDto.getPostId() != null ) {
-            post.setPostId( postPatchDto.getPostId() );
-        }
+        post.setPostId( postPatchDto.getPostId() );
         post.setTitle( postPatchDto.getTitle() );
         post.setContent( postPatchDto.getContent() );
 

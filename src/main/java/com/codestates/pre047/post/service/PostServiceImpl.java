@@ -36,7 +36,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post findPost(Long postId) {
+    public Post findPost(long postId) {
         return findVerifiedPost(postId);
     }
 
@@ -48,7 +48,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void deletePost(Long postId) {
+    public void deletePost(long postId) {
 
         Post findPost = findVerifiedPost(postId);
 
