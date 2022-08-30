@@ -120,7 +120,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
                 .andExpect(jsonPath("$.data.postId").value(patch.getPostId()))
                 .andExpect(jsonPath("$.data.title").value(patch.getTitle()))
                 .andExpect(jsonPath("$.data.content").value(patch.getContent()))
-                .andDo(document("patch-member",
+                .andDo(document("patch-post",
                         getRequestPreProcessor(),
                         getResponsePreProcessor(),
                         pathParameters(
@@ -139,7 +139,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
 
 
     @Test
-    public void getMemberTest() throws Exception {
+    public void getPostTest() throws Exception {
         // given
         long postId = 1L;
         PostDto.Response response = StubData.MockPost.getSingleResponseBody();
@@ -158,7 +158,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
                 .andExpect(jsonPath("$.data.content").value(response.getContent()))
 
                 .andDo(
-                        document("get-member",
+                        document("get-post",
                                 getRequestPreProcessor(),
                                 getResponsePreProcessor(),
                                 pathParameters(
@@ -172,7 +172,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
     }
 
     @Test
-    public void getMembersTest() throws Exception {
+    public void getPostsTest() throws Exception {
         // given
         String page = "1";
         String size = "10";
@@ -217,7 +217,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
     }
 
     @Test
-    public void deleteMemberTest() throws Exception {
+    public void deletePostTest() throws Exception {
         // given
         long postId = 1L;
         doNothing().when(postService).deletePost(Mockito.anyLong());
@@ -231,7 +231,7 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
                                 getRequestPreProcessor(),
                                 getResponsePreProcessor(),
                                 pathParameters(
-                                       getPostRequestPathParameterDescriptor()
+                                        getPostRequestPathParameterDescriptor()
                                 )
                         )
                 );

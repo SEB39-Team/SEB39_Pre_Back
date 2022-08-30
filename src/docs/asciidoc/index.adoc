@@ -17,3 +17,85 @@ API 문서 개요
 
 CAUTION: 이 문서는 학습용으로 일부 기능에 제한이 있습니다.
 ***
+
+
+== PostController
+=== 게시글 등록
+.curl-request
+include::{snippets}/post-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-post/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-post/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-post/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-post/response-fields.adoc[]
+
+=== 게시글 수정
+.curl-request
+include::{snippets}/patch-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-post/http-request.adoc[]
+
+.request-fields
+include::{snippets}/patch-post/request-fields.adoc[]
+
+.http-response
+include::{snippets}/patch-post/http-response.adoc[]
+
+.response-fields
+include::{snippets}/patch-post/response-fields.adoc[]
+
+.path-parameters
+include::{snippets}/patch-post/path-parameters.adoc[]
+
+=== 게시글 조회
+.curl-request
+include::{snippets}/get-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-post/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-post/http-response.adoc[]
+
+.path-parameters
+include::{snippets}/get-post/path-parameters.adoc[]
+
+.response-fields
+include::{snippets}/get-post/response-fields.adoc[]
+
+=== 전체 게시글 조회
+.curl-request
+include::{snippets}/get-posts/curl-request.adoc[]
+
+.http-request
+include::{snippets}/get-posts/http-request.adoc[]
+
+.http-response
+include::{snippets}/get-posts/http-response.adoc[]
+
+.request-parameters
+include::{snippets}/get-posts/request-parameters.adoc[]
+
+.response-fields
+include::{snippets}/get-posts/response-fields.adoc[]
+
+=== 게시글 삭제
+.curl-request
+include::{snippets}/delete-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-post/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-post/http-response.adoc[]
+
+.path-parameters
+include::{snippets}/delete-post/path-parameters.adoc[]
