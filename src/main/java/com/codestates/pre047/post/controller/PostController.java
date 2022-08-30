@@ -1,10 +1,14 @@
 package com.codestates.pre047.post.controller;
 
+import com.codestates.pre047.dto.MultiResponseDto;
+import com.codestates.pre047.post.dto.PostPatchDto;
 import com.codestates.pre047.post.dto.PostPostDto;
+import com.codestates.pre047.post.dto.PostResponseDto;
 import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.mapper.PostMapper;
 import com.codestates.pre047.response.ErrorResponse;
 import com.codestates.pre047.post.service.PostService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,12 +43,59 @@ public class PostController {
         /* mapper 자동화 구현 // Build.gradle 수정
         */
 
-        Post post = mapper.postPostDtoToPost(postPostDto);
+        Post post = postService.createPost(mapper.postPostDtoToPost(postPostDto));
 
-        Post response = postService.createPost(post);
-
-        return new ResponseEntity<>(mapper.postToPostResponseDto(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.postToPostResponseDto(post), HttpStatus.CREATED);
     }
+
+
+
+    // 글수정
+
+    @PatchMapping("/{post-id}")
+    public ResponseEntity patchPost(@PathVariable("post-id") @Positive long postId,
+                                    @Valid @RequestBody PostPatchDto postPatchDto) {
+
+        postPatchDto.setPostId(postId);
+
+
+        Post post = postService.updatePost(mapper.postPatchDtoToPost(postPatchDto));
+
+        return new ResponseEntity<>(mapper.postToPostResponseDto(post),HttpStatus.OK);
+    }
+
+    // 특정 게시글 조회
+
+    @GetMapping("/{post-id}")
+    public ResponseEntity findPost(@PathVariable("post-id") long postId) {
+
+        Post post = postService.findPost(postId);
+
+        return new ResponseEntity<>(mapper.postToPostResponseDto(post),HttpStatus.OK);
+    }
+
+    // 전체 글목록 조회
+
+    @GetMapping
+    public ResponseEntity findPosts(@RequestParam @Positive int page, @RequestParam @Positive int size) {
+        Page<Post> posts = postService.findPosts(page, size);
+
+        List<PostResponseDto> response = mapper.postsToPostsDtoResponseDtos(posts);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    // 글 삭제
+
+    @DeleteMapping("/{post-id}")
+    public ResponseEntity deletePost(@PathVariable("post-id") long postId) {
+
+        postService.deletePost(postId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 
     @ExceptionHandler
     public ResponseEntity handleException(MethodArgumentNotValidException e) {
@@ -60,32 +112,4 @@ public class PostController {
 
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     } // 예외처리 일괄 수정 예정
-
-    // 글수정
-
-    @PatchMapping("/patch")
-    public ResponseEntity patchPost() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    // 특정 게시글 조회
-
-    @GetMapping("/{post-id}")
-    public ResponseEntity findPost() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    // 전체 글목록 조회
-
-    @GetMapping
-    public ResponseEntity findPosts() {
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    // 글 삭제
-
-    @DeleteMapping("/{post-id}")
-    public ResponseEntity deletePost() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }
