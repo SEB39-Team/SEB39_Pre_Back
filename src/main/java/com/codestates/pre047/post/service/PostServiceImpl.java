@@ -4,6 +4,8 @@ import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,29 +26,46 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public Post updatePost(Post post) {
-        return null;
+
+        Post findPost = findVerifiedPost(post.getPostId());
+
+        Optional.ofNullable(post.getTitle()).ifPresent(title -> findPost.setTitle(title));
+        Optional.ofNullable(post.getContent()).ifPresent(content -> findPost.setContent(content));
+
+        return postRepository.save(findPost);
     }
 
     @Override
     public Post findPost(Long postId) {
-        return existPost(postId);
+        return findVerifiedPost(postId);
     }
 
     @Override
     public Page<Post> findPosts(int page, int size) {
-        return null;
+
+        return postRepository.findAll(PageRequest.of(page, size, Sort.by("postId").descending()));
+
     }
 
     @Override
     public void deletePost(Long postId) {
 
+        Post findPost = findVerifiedPost(postId);
+
+        postRepository.delete(findPost);
+
     }
-
-
-    private Post existPost(Long postId) {
+/*    private Post existPost(Long postId) {
         Optional<Post> existPost = postRepository.findById(postId);
 
         return existPost.orElseThrow(() ->
                 new RuntimeException("PostId not exist"));
+    }*/
+
+    private Post findVerifiedPost(long postId) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        Post findPost = optionalPost.orElseThrow(() -> new RuntimeException("PostId not exist"));
+
+        return findPost;
     }
 }
