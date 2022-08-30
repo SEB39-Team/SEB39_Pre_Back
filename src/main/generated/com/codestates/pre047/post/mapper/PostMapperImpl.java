@@ -1,9 +1,8 @@
 package com.codestates.pre047.post.mapper;
 
-import com.codestates.pre047.post.dto.PostPatchDto;
-import com.codestates.pre047.post.dto.PostPostDto;
-import com.codestates.pre047.post.dto.PostResponseDto;
-import com.codestates.pre047.post.entity.Post;
+import com.codestates.pre047.post.dto.PostDto.Patch;
+import com.codestates.pre047.post.dto.PostDto.Post;
+import com.codestates.pre047.post.dto.PostDto.Response;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -11,43 +10,43 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-30T15:30:06+0900",
+    date = "2022-08-30T17:22:51+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.15.1 (Oracle Corporation)"
 )
 @Component
 public class PostMapperImpl implements PostMapper {
 
     @Override
-    public Post postPostDtoToPost(PostPostDto postPostDto) {
-        if ( postPostDto == null ) {
+    public com.codestates.pre047.post.entity.Post postPostToPost(Post requestBody) {
+        if ( requestBody == null ) {
             return null;
         }
 
-        Post post = new Post();
+        com.codestates.pre047.post.entity.Post post = new com.codestates.pre047.post.entity.Post();
 
-        post.setTitle( postPostDto.getTitle() );
-        post.setContent( postPostDto.getContent() );
+        post.setTitle( requestBody.getTitle() );
+        post.setContent( requestBody.getContent() );
 
         return post;
     }
 
     @Override
-    public Post postPatchDtoToPost(PostPatchDto postPatchDto) {
-        if ( postPatchDto == null ) {
+    public com.codestates.pre047.post.entity.Post postPatchToPost(Patch requestBody) {
+        if ( requestBody == null ) {
             return null;
         }
 
-        Post post = new Post();
+        com.codestates.pre047.post.entity.Post post = new com.codestates.pre047.post.entity.Post();
 
-        post.setPostId( postPatchDto.getPostId() );
-        post.setTitle( postPatchDto.getTitle() );
-        post.setContent( postPatchDto.getContent() );
+        post.setPostId( requestBody.getPostId() );
+        post.setTitle( requestBody.getTitle() );
+        post.setContent( requestBody.getContent() );
 
         return post;
     }
 
     @Override
-    public PostResponseDto postToPostResponseDto(Post post) {
+    public Response postToPostResponse(com.codestates.pre047.post.entity.Post post) {
         if ( post == null ) {
             return null;
         }
@@ -60,20 +59,20 @@ public class PostMapperImpl implements PostMapper {
         title = post.getTitle();
         content = post.getContent();
 
-        PostResponseDto postResponseDto = new PostResponseDto( postId, title, content );
+        Response response = new Response( postId, title, content );
 
-        return postResponseDto;
+        return response;
     }
 
     @Override
-    public List<PostResponseDto> postsToPostsDtoResponseDtos(List<Post> posts) {
+    public List<Response> postsToPostsResponseDtos(List<com.codestates.pre047.post.entity.Post> posts) {
         if ( posts == null ) {
             return null;
         }
 
-        List<PostResponseDto> list = new ArrayList<PostResponseDto>( posts.size() );
-        for ( Post post : posts ) {
-            list.add( postToPostResponseDto( post ) );
+        List<Response> list = new ArrayList<Response>( posts.size() );
+        for ( com.codestates.pre047.post.entity.Post post : posts ) {
+            list.add( postToPostResponse( post ) );
         }
 
         return list;

@@ -1,5 +1,6 @@
 package com.codestates.pre047.post.controller;
 
+import com.codestates.pre047.post.dto.PostDto;
 import com.codestates.pre047.post.dto.PostPatchDto;
 import com.codestates.pre047.post.dto.PostPostDto;
 import com.codestates.pre047.post.dto.PostResponseDto;
@@ -8,6 +9,7 @@ import com.codestates.pre047.post.mapper.PostMapper;
 import com.codestates.pre047.post.service.PostService;
 import com.codestates.pre047.response.MultiResponseDto;
 import com.codestates.pre047.response.SingleResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +23,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/posts")
 @Validated
+@Slf4j
 public class PostController {
 
-    // mapper 자동화 / 예외처리 Refactoring / h2 -> my sql 연동
-    /* mapper 자동화 구현 // Build.gradle 수정
-     */
+    //   예외처리 Refactoring / h2 -> my sql 연동
+
 
     private final PostService postService;
     private final PostMapper mapper;
@@ -37,11 +39,15 @@ public class PostController {
 
     // 글작성
     @PostMapping("/create")
-    public ResponseEntity createPost(@Valid @RequestBody PostPostDto postPostDto) {
+    public ResponseEntity createPost(@Valid @RequestBody PostDto.Post requestBody) {
+        Post post = mapper.postPostToPost(requestBody);
 
-        Post post = postService.createPost(mapper.postPostDtoToPost(postPostDto));
+        Post createdPost = postService.createPost(post);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.postToPostResponseDto(post)), HttpStatus.CREATED);
+        PostDto.Response response = mapper.postToPostResponse(createdPost);
+
+
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
 
@@ -50,14 +56,15 @@ public class PostController {
 
     @PatchMapping("/{post-id}")
     public ResponseEntity patchPost(@PathVariable("post-id") @Positive long postId,
-                                    @Valid @RequestBody PostPatchDto postPatchDto) {
+                                    @Valid @RequestBody PostDto.Patch requestBody) {
 
-        postPatchDto.setPostId(postId);
+        requestBody.setPostId(postId);
 
+        Post post = postService.updatePost(mapper.postPatchToPost(requestBody));
 
-        Post post = postService.updatePost(mapper.postPatchDtoToPost(postPatchDto));
+        PostDto.Response response = mapper.postToPostResponse(post);
 
-        return new ResponseEntity<>( new SingleResponseDto<>(mapper.postToPostResponseDto(post)),HttpStatus.OK);
+        return new ResponseEntity<>( new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
     // 특정 게시글 조회
@@ -66,8 +73,9 @@ public class PostController {
     public ResponseEntity getCoffee(@PathVariable("post-id") @Positive long postId) {
 
         Post post = postService.findPost(postId);
+        PostDto.Response response = mapper.postToPostResponse(post);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.postToPostResponseDto(post)),HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
     // 전체 글목록 조회
@@ -79,7 +87,9 @@ public class PostController {
 
         List<Post> posts = pageposts.getContent();
 
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.postsToPostsDtoResponseDtos(posts),
+        List<PostDto.Response> responses = mapper.postsToPostsResponseDtos(posts);
+
+        return new ResponseEntity<>(new MultiResponseDto<>(responses,
                 pageposts),HttpStatus.OK);
     }
 

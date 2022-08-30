@@ -1,5 +1,6 @@
 package com.codestates.pre047.post.mapper;
 
+import com.codestates.pre047.post.dto.PostDto;
 import com.codestates.pre047.post.dto.PostPatchDto;
 import com.codestates.pre047.post.dto.PostPostDto;
 import com.codestates.pre047.post.dto.PostResponseDto;
@@ -13,8 +14,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PostMapper {
-    Post postPostDtoToPost(PostPostDto postPostDto);
-    Post postPatchDtoToPost(PostPatchDto postPatchDto);
-    PostResponseDto postToPostResponseDto(Post post);
-    List<PostResponseDto> postsToPostsDtoResponseDtos(List<Post> posts);
+    Post postPostToPost(PostDto.Post requestBody);
+    Post postPatchToPost(PostDto.Patch requestBody);
+    PostDto.Response postToPostResponse(Post post);
+    List<PostDto.Response> postsToPostsResponseDtos(List<Post> posts);
 }
