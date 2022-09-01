@@ -1,5 +1,6 @@
 package com.codestates.pre047.post.entity;
 
+import com.codestates.pre047.baseEntity.BaseTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,12 +22,7 @@ public class Post {
 
     @Column(name = "content", nullable = false)
     private String content;
-
-//    @JoinColumn(name = "memberId")
-//    @ManyToOne
-//    private Member member;
-    // 회원 기능 구현 후 엔터티 매핑
-
+    
 
     public Post(long postId, String title, String content) {
         this.postId = postId;

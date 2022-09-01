@@ -1,5 +1,7 @@
 package com.codestates.pre047.post.service;
 
+import com.codestates.pre047.exception.BusinessLogicException;
+import com.codestates.pre047.exception.ExceptionCode;
 import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +38,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post findPost(long postId) {
-        return findVerifiedPost(postId);
+    public Post findPost(long postId) {return findVerifiedPost(postId);
     }
 
     @Override
