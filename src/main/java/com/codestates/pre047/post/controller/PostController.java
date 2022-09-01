@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -24,8 +25,6 @@ import java.util.List;
 public class PostController {
 
     //   예외처리 Refactoring / h2 -> my sql 연동
-
-
     private final PostService postService;
     private final PostMapper mapper;
 
@@ -35,6 +34,7 @@ public class PostController {
     }
 
     // 글작성
+
     @PostMapping
     public ResponseEntity createPost(@Valid @RequestBody PostDto.Post requestBody) {
         Post post = mapper.postPostToPost(requestBody);
@@ -46,8 +46,6 @@ public class PostController {
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
-
-
 
     // 글수정
 
@@ -100,4 +98,12 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    //답변 게시글 작성
+
+
+
+
 }
+
+
+
