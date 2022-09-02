@@ -9,21 +9,21 @@ public interface PostService {
 
 
     // 게시글 작성
-    public Post createPost(Post post);
+    Post createPost(Post post);
 
     // 게시글 수정
 
-    public Post updatePost(Post post);
+    Post updatePost(Post post);
 
     // 게시글 조회
 
-    public Post findPost(long postId);
+    Post findPost(long postId);
 
     // 전체글 조회
 
-    public Page<Post> findPosts(int page, int size);
+    Page<Post> findPosts(int page, int size);
 
     // 전체글 삭제
 
-    public void deletePost(long postId);
+    void deletePost(long postId);
 }

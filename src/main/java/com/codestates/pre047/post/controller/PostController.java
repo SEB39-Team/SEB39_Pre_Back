@@ -65,7 +65,7 @@ public class PostController {
     // 특정 게시글 조회
 
     @GetMapping("/{post-id}")
-    public ResponseEntity getCoffee(@PathVariable("post-id") @Positive long postId) {
+    public ResponseEntity getPost(@PathVariable("post-id") @Positive long postId) {
 
         Post post = postService.findPost(postId);
         PostDto.Response response = mapper.postToPostResponse(post);
@@ -76,7 +76,7 @@ public class PostController {
     // 전체 글목록 조회
 
     @GetMapping
-    public ResponseEntity getCoffees(@RequestParam @Positive int page, @RequestParam @Positive int size) {
+    public ResponseEntity getPosts(@RequestParam @Positive int page, @RequestParam @Positive int size) {
 
         Page<Post> pageposts = postService.findPosts(page-1, size);
 
