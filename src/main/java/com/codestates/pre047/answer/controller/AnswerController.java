@@ -9,6 +9,7 @@ import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.service.PostService;
 import com.codestates.pre047.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -57,14 +58,24 @@ public class AnswerController {
 
     }
 
-/*    @PatchMapping("/{answerId}")
-    public ResponseEntity updateAnswer(@PathVariable("answerId") long answerId) {
-        return null;
+    @PatchMapping("/{answerId}")
+    public ResponseEntity updateAnswer(@PathVariable("answerId") long answerId, @RequestBody AnswerDto.Patch answerPatch)
+    {
+        Answer answer = mapper.AnswerPatchToAnswer(answerPatch);
+        answer.setAnswerId(answerId);
+        Answer response = answerService.update(answer);
+
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.AnswerToAnswerDtoResponse(response)),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{answerId")
+    @DeleteMapping("/{answerId}")
     public ResponseEntity deleteAnswer(@PathVariable("answerId") long answerId) {
-        return null;
-    }*/
+
+        answerService.deleteAnswer(answerId);
+
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

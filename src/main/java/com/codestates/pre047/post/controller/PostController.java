@@ -37,6 +37,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity createPost(@Valid @RequestBody PostDto.Post requestBody) {
+
         Post post = mapper.postPostToPost(requestBody);
 
         Post createdPost = postService.createPost(post);
@@ -68,7 +69,7 @@ public class PostController {
     public ResponseEntity getPost(@PathVariable("post-id") @Positive long postId) {
 
         Post post = postService.findPost(postId);
-        PostDto.Response response = mapper.postToPostResponse(post);
+        PostDto.AnswerResponse response = mapper.postToAnswerResponse(post);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
