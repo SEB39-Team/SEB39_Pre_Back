@@ -27,8 +27,8 @@ public class MemberDto {
         @Size(message = "Password can't be less 6 characters", min = 6)
         private String password;
 
-        @NotBlank(message = "Password confirm can't be empty")
-        private String passwordConfirm;
+/*        @NotBlank(message = "Password confirm can't be empty")
+        private String passwordConfirm;*/
 
     }
 
