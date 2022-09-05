@@ -12,13 +12,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.GrantedAuthority;
+/*import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;*/
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService /*implements UserDetailsService*/ {
 
     private final MemberRepository memberRepository;
 
@@ -78,7 +78,7 @@ public class MemberService implements UserDetailsService {
 
 
 
-    @Override
+/*    @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
         Optional<Member> userEntityWrapper = memberRepository.findByEmail(userEmail);
         Member userEntity = userEntityWrapper.get();
@@ -92,5 +92,5 @@ public class MemberService implements UserDetailsService {
         }
 
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
-    }
+    }*/
 }

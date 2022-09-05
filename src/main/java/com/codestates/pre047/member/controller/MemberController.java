@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +59,7 @@ public class MemberController {
         memberService.deleteMember(memberId);
     }
 
-    // 메인 페이지
+/*    // 메인 페이지
     @GetMapping("/")
     public String index() {
 
@@ -108,5 +107,5 @@ public class MemberController {
     @GetMapping("/admin")
     public String Admin() {
         return "/admin";
-    }
+    }*/
 }

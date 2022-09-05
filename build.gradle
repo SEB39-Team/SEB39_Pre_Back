@@ -36,10 +36,16 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	testImplementation 'org.springframework.security:spring-security-test'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//	testImplementation 'org.springframework.security:spring-security-test'
 
 }
 
