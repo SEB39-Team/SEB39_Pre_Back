@@ -1,8 +1,10 @@
 package com.codestates.pre047.post.dto;
 
+import com.codestates.pre047.answer.dto.AnswerDto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 public class PostDto {
 
@@ -47,4 +49,16 @@ public class PostDto {
             this.content = content;
         }
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    public static class AnswerResponse {
+        private long postId;
+        private String title;
+        private String content;
+        private List<AnswerDto.Response> answers;
+
+    }
+
 }

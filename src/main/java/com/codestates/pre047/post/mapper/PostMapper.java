@@ -12,5 +12,7 @@ public interface PostMapper {
     Post postPostToPost(PostDto.Post requestBody);
     Post postPatchToPost(PostDto.Patch requestBody);
     PostDto.Response postToPostResponse(Post post);
+
+    PostDto.AnswerResponse postToAnswerResponse(Post post);
     List<PostDto.Response> postsToPostResponses(List<Post> posts);
 }

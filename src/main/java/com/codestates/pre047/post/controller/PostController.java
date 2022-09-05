@@ -24,7 +24,6 @@ import java.util.List;
 @Slf4j
 public class PostController {
 
-    //   예외처리 Refactoring / h2 -> my sql 연동
     private final PostService postService;
     private final PostMapper mapper;
 
@@ -37,6 +36,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity createPost(@Valid @RequestBody PostDto.Post requestBody) {
+
         Post post = mapper.postPostToPost(requestBody);
 
         Post createdPost = postService.createPost(post);
@@ -65,10 +65,10 @@ public class PostController {
     // 특정 게시글 조회
 
     @GetMapping("/{post-id}")
-    public ResponseEntity getCoffee(@PathVariable("post-id") @Positive long postId) {
+    public ResponseEntity getPost(@PathVariable("post-id") @Positive long postId) {
 
         Post post = postService.findPost(postId);
-        PostDto.Response response = mapper.postToPostResponse(post);
+        PostDto.AnswerResponse response = mapper.postToAnswerResponse(post);
 
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
@@ -76,7 +76,7 @@ public class PostController {
     // 전체 글목록 조회
 
     @GetMapping
-    public ResponseEntity getCoffees(@RequestParam @Positive int page, @RequestParam @Positive int size) {
+    public ResponseEntity getPosts(@RequestParam @Positive int page, @RequestParam @Positive int size) {
 
         Page<Post> pageposts = postService.findPosts(page-1, size);
 
@@ -97,10 +97,6 @@ public class PostController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    //답변 게시글 작성
-
-
 
 
 }
