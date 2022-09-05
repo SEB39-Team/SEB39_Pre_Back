@@ -1,5 +1,6 @@
 package com.codestates.pre047.config;
 
+import com.codestates.pre047.member.repository.MemberRepository;
 import com.codestates.pre047.member.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import lombok.AllArgsConstructor;
@@ -12,15 +13,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.CorsFilter;
 
 
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private MemberService memberService;
+public class SecurityConfig {
 
-    @Bean
+/*    private final CorsFilter corsFilter;
+    private MemberRepository memberRepository;*/
+
+
+
+
+/*    private MemberService memberService;*/
+
+/*    @Bean
     public PasswordEncoder passwordEncoder()  {
         return new BCryptPasswordEncoder();
     }
@@ -58,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
-    }
+    }*/
 
 
 }

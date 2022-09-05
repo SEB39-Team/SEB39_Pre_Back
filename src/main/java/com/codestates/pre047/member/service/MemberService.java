@@ -31,11 +31,10 @@ import java.util.Optional;
 public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Member saveMember(Member member) {
         verifiedMemberEmail(member.getEmail());
-        member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
+/*        member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));*/
         member.setRoles("ROLE_USER");
 
         return memberRepository.save(member);

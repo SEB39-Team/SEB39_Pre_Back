@@ -4,14 +4,19 @@ import com.codestates.pre047.member.dto.MemberDto;
 import com.codestates.pre047.member.entity.Member;
 import com.codestates.pre047.member.mapper.MemberMapper;
 import com.codestates.pre047.member.service.MemberService;
+import com.codestates.pre047.response.MultiResponseDto;
 import com.codestates.pre047.response.SingleResponseDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -38,8 +43,20 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(findMember)), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity getmembers(@RequestParam @Positive int page, @RequestParam @Positive int size) {
+        Page<Member> pagemembers = memberService.findAllMembers(page - 1, size);
+
+        List<Member> members = pagemembers.getContent();
+
+        List<MemberDto.Response> responses = mapper.membersToMemberResponse(members);
+
+        return new ResponseEntity<>(new MultiResponseDto<>(responses, pagemembers), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{member-id}")
     public void deleteMember(@PathVariable("member-id") Long memberId) {
+
         memberService.deleteMember(memberId);
     }
 

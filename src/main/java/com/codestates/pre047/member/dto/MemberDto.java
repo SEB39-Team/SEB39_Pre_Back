@@ -48,11 +48,11 @@ public class MemberDto {
 
     @Getter
     @AllArgsConstructor
-    @NoArgsConstructor
     @Builder
     public static class Response {
+        @NotBlank(message = "Name can't be empty")
+        private String username;
     }
 
-    @NotBlank(message = "Name can't be empty")
-    private String username;
+
 }
