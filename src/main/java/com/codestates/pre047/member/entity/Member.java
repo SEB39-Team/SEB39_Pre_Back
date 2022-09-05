@@ -14,7 +14,6 @@ import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
@@ -22,7 +21,7 @@ import java.util.List;
 public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -37,6 +36,13 @@ public class Member extends BaseTimeEntity {
 
     private String roles;
     private String providerId;
+
+    public List<String> getRoleList() {
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
 
     @Builder
     public Member(Long id, String username, String password, String email, String roles, String providerId) {
@@ -54,10 +60,5 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "post")
     private List<Answer> answers;
 
-    public List<String> getRoleList() {
-        if (this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
-    }
+
 }
