@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface AnswerService {
 
-    Answer save(Answer answer);
+    Answer save(long postId ,Answer answer);
 
     Answer update(Answer answer);
 

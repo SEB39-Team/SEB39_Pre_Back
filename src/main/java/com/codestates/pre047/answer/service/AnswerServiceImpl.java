@@ -4,6 +4,8 @@ import com.codestates.pre047.answer.entity.Answer;
 import com.codestates.pre047.answer.repository.AnswerRepository;
 import com.codestates.pre047.exception.BusinessLogicException;
 import com.codestates.pre047.exception.ExceptionCode;
+import com.codestates.pre047.post.entity.Post;
+import com.codestates.pre047.post.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,11 +21,13 @@ import java.util.Optional;
 public class AnswerServiceImpl implements AnswerService{
 
     private final AnswerRepository answerRepository;
+    private final PostService postService;
 
     @Override
-    public Answer save(Answer answer) {
+    public Answer save(long postId,Answer answer) {
 
-
+        Post post = postService.findPost(postId);
+        answer.setPost(post);
         return answerRepository.save(answer);
     }
 
@@ -31,6 +35,8 @@ public class AnswerServiceImpl implements AnswerService{
     public Answer update(Answer answer) {
 
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
+
+
         return answerRepository.save(answer);
     }
 
