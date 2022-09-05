@@ -61,25 +61,27 @@ public class MemberController {
         memberService.deleteMember(memberId);
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "<h1>home</h1>";
-    }
-
-    @PostMapping("/token")
-    public String token() {
-        return "<h1>token</h1>";
+    @GetMapping("/user")
+    public ResponseEntity user() {
+        return new ResponseEntity<>("user 권한을 가지고 있습니다.", HttpStatus.OK);
     }
 
 
-
-    @GetMapping("/api/v1/user")
-    public String user() {
-        return "user";
+    @GetMapping("/manager")
+    public ResponseEntity manager() {
+        return new ResponseEntity<>("manager 권한을 가지고 있습니다.", HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/admin")
-    public String admin() {
-        return "admin";
+
+    @GetMapping("/admin")
+    public ResponseEntity admin() {
+        return new ResponseEntity<>("admin 권한을 가지고 있습니다. ", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/login")
+    public ResponseEntity login() {
+
+        return new ResponseEntity<>("토큰이 존재하지 않습니다. ", HttpStatus.OK);
     }
 }

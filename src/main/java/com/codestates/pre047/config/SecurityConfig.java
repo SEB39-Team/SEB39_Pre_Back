@@ -25,8 +25,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-
-        // http.addFilterBefore(new FirstFilter(), SecurityContextHolderFilter.class); // 주석 처리 or 제거
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -45,7 +43,7 @@ public class SecurityConfig {
                 .anyRequest().permitAll();
 
         http.formLogin()
-                .loginPage("/v1/member/login")
+                .loginPage("/v1/members/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/");
 
