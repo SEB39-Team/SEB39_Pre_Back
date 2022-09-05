@@ -24,7 +24,6 @@ import java.util.List;
 @Slf4j
 public class PostController {
 
-    //   예외처리 Refactoring / h2 -> my sql 연동
     private final PostService postService;
     private final PostMapper mapper;
 
@@ -98,10 +97,6 @@ public class PostController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    //답변 게시글 작성
-
-
 
 
 }

@@ -34,7 +34,7 @@ public class GlobalExceptionAdvice {
         return response;
     }
 
-    // GlobalExceptionAdvice 기능 추가 1
+
     @ExceptionHandler
     public ResponseEntity handleBusinessLogicException(BusinessLogicException e) {
         final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
@@ -43,7 +43,6 @@ public class GlobalExceptionAdvice {
                 .getStatus()));
     }
 
-    // GlobalExceptionAdvice 기능 추가 2
     @ExceptionHandler
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorResponse handleHttpRequestMethodNotSupportedException(
@@ -54,13 +53,10 @@ public class GlobalExceptionAdvice {
         return response;
     }
 
-    // GlobalExceptionAdvice 기능 추가 3
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleException(Exception e) {
         log.error("# handle Exception", e);
-        // TODO 애플리케이션의 에러는 에러 로그를 로그에 기록하고, 관리자에게 이메일이나 카카오 톡,
-        //  슬랙 등으로 알려주는 로직이 있는게 좋습니다.
 
         final ErrorResponse response = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
 
