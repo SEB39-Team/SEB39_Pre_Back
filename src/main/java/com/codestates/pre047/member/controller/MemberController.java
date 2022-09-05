@@ -1,39 +1,64 @@
 package com.codestates.pre047.member.controller;
 
 import com.codestates.pre047.member.dto.MemberDto;
+import com.codestates.pre047.member.entity.Member;
+import com.codestates.pre047.member.mapper.MemberMapper;
 import com.codestates.pre047.member.service.MemberService;
+import com.codestates.pre047.response.SingleResponseDto;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/v1/members")
 public class MemberController {
     private MemberService memberService;
+    private MemberMapper mapper;
+
+    // 회원가입 처리
+    @PostMapping("/create")
+    public ResponseEntity registration(@Validated @RequestBody MemberDto.Post postMember) {
+
+        Member member = mapper.memberPostDtoToMember(postMember);
+        memberService.saveMember(member);
+
+        return new ResponseEntity<>("회원 가입 완료", HttpStatus.OK);
+   }
+
+    @GetMapping("/{member-id}")
+    public ResponseEntity findMember(@PathVariable("member-id") Long memberId) {
+        Member findMember = memberService.findById(memberId);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(findMember)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{member-id}")
+    public void deleteMember(@PathVariable("member-id") Long memberId) {
+        memberService.deleteMember(memberId);
+    }
 
     // 메인 페이지
     @GetMapping("/")
     public String index() {
+
         return "/index";
     }
 
     // 회원가입 페이지
-    @GetMapping("/user/signup")
+    @GetMapping("/signup")
     public String Signup() {
         return "/signup";
     }
 
-    // 회원가입 처리
-    @PostMapping("/user/signup")
-    public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
-        return "redirect:/user/login";
-    }
 
     // 로그인 페이지
-    @GetMapping("/user/login")
+    @GetMapping("/login")
     public String Login() {
         return "/login";
     }

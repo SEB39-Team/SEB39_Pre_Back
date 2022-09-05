@@ -41,9 +41,11 @@ public class MemberService implements UserDetailsService {
         return memberRepository.save(member);
     }
 
-    public Optional<Member> findById(Long memberId) {
+    public Member findById(Long memberId) {
+        Optional<Member> optionalMember = memberRepository.findById(memberId);
+        Member member = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.INFO_NOT_FOUND));
 
-        return memberRepository.findById(memberId);
+        return member;
     }
 
 
@@ -74,6 +76,8 @@ public class MemberService implements UserDetailsService {
         Optional<Member> verifyMember = memberRepository.findByEmail(email);
         if (verifyMember.isPresent()) throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
