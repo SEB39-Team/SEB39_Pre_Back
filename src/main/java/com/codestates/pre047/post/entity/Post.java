@@ -2,6 +2,7 @@ package com.codestates.pre047.post.entity;
 
 import com.codestates.pre047.answer.entity.Answer;
 import com.codestates.pre047.baseEntity.BaseTimeEntity;
+import com.codestates.pre047.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,10 +27,14 @@ public class Post {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Answer> answers = new ArrayList<>();
+    @JoinColumn(name = "memberId")
+    @ManyToOne
+    private Member member;
 
+
+    @Column
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Answer> answers = new ArrayList<>();
 
     public Post(long postId, String title, String content) {
 

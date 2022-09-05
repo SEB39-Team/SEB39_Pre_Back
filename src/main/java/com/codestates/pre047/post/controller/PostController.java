@@ -4,15 +4,14 @@ import com.codestates.pre047.post.dto.PostDto;
 import com.codestates.pre047.post.entity.Post;
 import com.codestates.pre047.post.mapper.PostMapper;
 import com.codestates.pre047.post.service.PostService;
-import com.codestates.pre047.response.MultiResponseDto;
-import com.codestates.pre047.response.SingleResponseDto;
+import com.codestates.pre047.dto.MultiResponseDto;
+import com.codestates.pre047.dto.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

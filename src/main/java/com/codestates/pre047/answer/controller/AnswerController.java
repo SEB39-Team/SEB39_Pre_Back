@@ -5,7 +5,7 @@ import com.codestates.pre047.answer.dto.AnswerDto;
 import com.codestates.pre047.answer.entity.Answer;
 import com.codestates.pre047.answer.mapper.AnswerMapper;
 import com.codestates.pre047.answer.service.AnswerService;
-import com.codestates.pre047.response.SingleResponseDto;
+import com.codestates.pre047.dto.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
