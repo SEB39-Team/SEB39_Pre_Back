@@ -5,18 +5,12 @@ import com.codestates.pre047.answer.dto.AnswerDto;
 import com.codestates.pre047.answer.entity.Answer;
 import com.codestates.pre047.answer.mapper.AnswerMapper;
 import com.codestates.pre047.answer.service.AnswerService;
-import com.codestates.pre047.post.entity.Post;
-import com.codestates.pre047.post.service.PostService;
 import com.codestates.pre047.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 
