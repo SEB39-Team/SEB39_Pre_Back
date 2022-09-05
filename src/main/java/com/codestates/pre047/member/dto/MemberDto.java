@@ -1,6 +1,6 @@
 package com.codestates.pre047.member.dto;
 
-import com.codestates.pre047.member.entity.MemberEntity;
+import com.codestates.pre047.member.entity.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,8 +16,8 @@ public class MemberDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public MemberEntity toEntity(){
-        return MemberEntity.builder()
+    public Member toEntity(){
+        return Member.builder()
                 .id(id)
                 .email(email)
                 .password(password)

@@ -3,7 +3,7 @@ package com.codestates.pre047.member.service;
 
 import com.codestates.pre047.domain.Role;
 import com.codestates.pre047.member.dto.MemberDto;
-import com.codestates.pre047.member.entity.MemberEntity;
+import com.codestates.pre047.member.entity.Member;
 import com.codestates.pre047.member.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,8 +36,8 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<MemberEntity> userEntityWrapper = memberRepository.findByEmail(userEmail);
-        MemberEntity userEntity = userEntityWrapper.get();
+        Optional<Member> userEntityWrapper = memberRepository.findByEmail(userEmail);
+        Member userEntity = userEntityWrapper.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
