@@ -1,6 +1,7 @@
 package com.codestates.pre047.answer.entity;
 
 
+import com.codestates.pre047.member.entity.Member;
 import com.codestates.pre047.post.entity.Post;
 import lombok.*;
 
@@ -23,6 +24,8 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "postId")
     private Post post;
-    
-    /* member 추가 후 멤버 추가*/
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "memberId")
+    private Member member;
 }
