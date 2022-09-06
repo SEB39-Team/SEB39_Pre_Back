@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre047.helper;
 
 import com.google.gson.Gson;
@@ -114,3 +115,4 @@ public interface ControllerTestHelper<T> {
     }
 
 }
+*/

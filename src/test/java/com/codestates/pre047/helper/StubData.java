@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre047.helper;
 
 import com.codestates.pre047.post.dto.PostDto;
@@ -69,3 +70,4 @@ public class StubData {
 
 
 }
+*/
