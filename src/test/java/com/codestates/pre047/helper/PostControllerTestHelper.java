@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre047.helper;
 
 import org.springframework.restdocs.payload.FieldDescriptor;
@@ -55,3 +56,4 @@ public interface PostControllerTestHelper extends ControllerTestHelper{
     }
 
 }
+*/

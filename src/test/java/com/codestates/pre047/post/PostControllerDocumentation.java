@@ -1,3 +1,4 @@
+/*
 package com.codestates.pre047.post;
 
 
@@ -239,3 +240,4 @@ public class PostControllerDocumentation implements PostControllerTestHelper {
     }
 
 }
+*/
