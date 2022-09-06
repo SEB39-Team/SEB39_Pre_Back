@@ -42,13 +42,6 @@ public class SecurityConfig {
                 .access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll();
 
-        http.formLogin()
-                .loginPage("/v1/members/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
-
-
-
         return http.build();
     }
 

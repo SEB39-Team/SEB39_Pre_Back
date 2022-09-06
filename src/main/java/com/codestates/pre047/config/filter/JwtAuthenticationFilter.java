@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             ObjectMapper om = new ObjectMapper();
             Member member = om.readValue(request.getInputStream(), Member.class);
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getUsername(), member.getPassword());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(member.getEmail(), member.getPassword());
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withSubject("cos jwt token")
                 .withExpiresAt(new Date(System.currentTimeMillis() + (60 * 1000 * 10)))
                 .withClaim("id", principalDetails.getMember().getId())
-                .withClaim("username", principalDetails.getMember().getUsername())
+                .withClaim("email", principalDetails.getMember().getEmail())
                 .sign(Algorithm.HMAC512("cos_jwt_token"));
         response.addHeader("Authorization", "Bearer " + jwtToken);
     }
