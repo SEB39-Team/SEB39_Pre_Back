@@ -40,7 +40,8 @@ public class MemberService  {
         return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
     public void deleteMember(Long memberId) {
-
+        Member findMember = findVerifiedMember(memberId);
+        memberRepository.delete(findMember);
     }
 
     public void verifiedMemberEmail(String email) {
@@ -48,7 +49,14 @@ public class MemberService  {
         if (verifyMember.isPresent()) throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
     }
 
-
+    public Member findVerifiedMember(long memberId) {
+        Optional<Member> optionalMember =
+                memberRepository.findById(memberId);
+        Member findMember =
+                optionalMember.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.INFO_NOT_FOUND));
+        return findMember;
+    }
 
 
 }
